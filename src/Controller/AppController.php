@@ -43,6 +43,18 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+        'authError' => 'You need to log in.',
+        'authenticate' => [
+            'Form' => [
+                'fields' => ['username' => 'username', 'password' => 'password']
+            ]
+        ],
+        'storage' => 'Session'
+        ]);
+        $this->loadComponent('Cookie');
+        
+        $this->set('authUser', $this->Auth->user());
     }
 
     /**

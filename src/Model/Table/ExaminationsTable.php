@@ -96,8 +96,8 @@ class ExaminationsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['technican_id'], 'Users'));
-        $rules->add($rules->existsIn(['patient_id'], 'Users'));
+        $rules->add($rules->existsIn(['technican_id'], 'Technicans'));
+        $rules->add($rules->existsIn(['patient_id'], 'Patients'));
         return $rules;
     }
 }

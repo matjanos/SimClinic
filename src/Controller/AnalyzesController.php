@@ -46,9 +46,11 @@ class AnalyzesController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
         $analyze = $this->Analyzes->newEntity();
+        $analyze->examination = $this->Analyzes->Examinations->get($id);
+        $analyze->user=$this->Auth->user();
         if ($this->request->is('post')) {
             $analyze = $this->Analyzes->patchEntity($analyze, $this->request->data);
             if ($this->Analyzes->save($analyze)) {
@@ -58,10 +60,8 @@ class AnalyzesController extends AppController
                 $this->Flash->error(__('The analyze could not be saved. Please, try again.'));
             }
         }
-        $examinations = $this->Analyzes->Examinations->find('list', ['limit' => 200]);
-        $users = $this->Analyzes->Users->find('list', ['limit' => 200]);
         $parameters = $this->Analyzes->Parameters->find('list', ['limit' => 200]);
-        $this->set(compact('analyze', 'examinations', 'users', 'parameters'));
+        $this->set(compact('analyze', 'users' ,'parameters'));
         $this->set('_serialize', ['analyze']);
     }
 

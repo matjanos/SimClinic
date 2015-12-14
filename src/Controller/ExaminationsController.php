@@ -41,7 +41,7 @@ class ExaminationsController extends AppController
     public function view($id = null)
     {
         $examination = $this->Examinations->get($id, [
-            'contain' => ['Patients', 'Analyzes','Technicans']
+            'contain' => ['Technicans', 'Technicans.PersonalData','Patients', 'Patients.PersonalData']
         ]);
         $this->set('examination', $examination);
         $this->set('_serialize', ['examination']);
@@ -56,10 +56,12 @@ class ExaminationsController extends AppController
     {
         $examination = $this->Examinations->newEntity();
         if ($this->request->is('post')) {
+
             $examination = $this->Examinations->patchEntity($examination, $this->request->data);
 
             $imageUrl= $this->Upload->upload($this->request->data['image_path']);
             $examination->image_path=$imageUrl;
+
             if ($this->Examinations->save($examination)) {
                 $this->Flash->success(__('The examination has been saved.'));
                // return $this->redirect(['action' => 'index']);
@@ -84,31 +86,6 @@ class ExaminationsController extends AppController
         $this->set('_serialize', ['examination']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Examination id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $examination = $this->Examinations->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $examination = $this->Examinations->patchEntity($examination, $this->request->data);
-            if ($this->Examinations->save($examination)) {
-                $this->Flash->success(__('The examination has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The examination could not be saved. Please, try again.'));
-            }
-        }
-        $users = $this->Examinations->Users->find('list', ['limit' => 200]);
-        $this->set(compact('examination', 'users'));
-        $this->set('_serialize', ['examination']);
-    }
 
     /**
      * Delete method

@@ -27,7 +27,7 @@
                 <td><?= h($examination->date) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $examination->id]) ?>
-                    <?= $this->isTechnican($authUser)?$this->Html->link(__('Edit'), ['action' => 'edit', $examination->id]):'' ?>
+                    <?= $this->isDoctor($authUser)?$this->Html->link(__('Analize'), ['controller' => 'Analyzes','action' => 'add', $examination->id]):'' ?>
                     <?= $this->isTechnican($authUser)?$this->Form->postLink(__('Delete'), ['action' => 'delete', $examination->id], ['confirm' => __('Are you sure you want to delete # {0}?', $examination->id)]):'' ?>
                 </td>
             </tr>

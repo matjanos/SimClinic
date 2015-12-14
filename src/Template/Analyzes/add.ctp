@@ -15,8 +15,7 @@
     <fieldset>
         <legend><?= __('Add Analyze') ?></legend>
         <?php
-            echo $this->Form->input('examination_id', ['options' => $examinations]);
-            echo $this->Form->input('doctor_id', ['options' => $users]);
+            echo $this->Html->image($analyze->examination->image_path);
             echo $this->Form->input('date');
             echo $this->Form->input('parameters._ids', ['options' => $parameters]);
         ?>

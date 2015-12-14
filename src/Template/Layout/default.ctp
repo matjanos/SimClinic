@@ -47,6 +47,9 @@ $cakeDescription = 'SimClinic';
             </li>
         </ul>
         <section class="top-bar-section">
+        <span class="left" style="color:white; font-size:smaller; margin-left:10px;">
+            Logged as: <?= $authUser!=null?$authUser['username']:'guest' ?>
+        </span>
             <ul class="right">
                 <li><?= $this->Html->link('Home',['controller'=>'Pages', 'action'=>'home']) ?></li>
                 <li><?= $this->Html->link('Examination',['controller'=>'Examinations']) ?></li>

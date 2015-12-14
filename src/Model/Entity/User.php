@@ -32,8 +32,8 @@ class User extends Entity
 
    protected function _getFullName()
     {
-        return $this->personal_data[0]->first_name . '  ' .
-            $this->personal_data[0]->last_name;
+        return $this->personal_data->first_name . '  ' .
+            $this->personal_data->last_name;
     }
 
     protected function _setPassword($password)

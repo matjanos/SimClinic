@@ -49,14 +49,13 @@ class ParametersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->add('name', 'valid', ['rule' => 'numeric'])
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
         $validator
-            ->add('measureUnit', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('measureUnit', 'create')
-            ->notEmpty('measureUnit');
+            ->add('maxParameterValue', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('maxParameterValue', 'create')
+            ->notEmpty('maxParameterValue');
 
         return $validator;
     }

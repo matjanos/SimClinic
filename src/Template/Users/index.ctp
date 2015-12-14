@@ -2,8 +2,6 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Personal Data'), ['controller' => 'PersonalData', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Personal Data'), ['controller' => 'PersonalData', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="users index large-9 medium-8 columns content">
@@ -28,7 +26,8 @@
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                    <?php if($this->isAdmin($authUser)) echo $this->Html->link($user->active?'Deactivate':'Activate', ['action' => 'toggleActive', $user->id]) ?>
+
                 </td>
             </tr>
             <?php endforeach; ?>

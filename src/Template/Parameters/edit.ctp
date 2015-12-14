@@ -18,7 +18,7 @@
         <legend><?= __('Edit Parameter') ?></legend>
         <?php
             echo $this->Form->input('name');
-            echo $this->Form->input('measureUnit');
+            echo $this->Form->input('maxParameterValue');
             echo $this->Form->input('analyzes._ids', ['options' => $analyzes]);
         ?>
     </fieldset>

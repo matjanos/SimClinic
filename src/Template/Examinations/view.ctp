@@ -4,7 +4,7 @@
         <li><?= $this->Form->postLink(__('Delete Examination'), ['action' => 'delete', $examination->id], ['confirm' => __('Are you sure you want to delete # {0}?', $examination->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Examinations'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Examination'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('New Analyze'), ['controller' => 'Analyzes', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Analyze'), ['controller' => 'Analyzes', 'action' => 'add', $examination->id]) ?> </li>
     </ul>
 </nav>
 <div class="examinations view large-9 medium-8 columns content">

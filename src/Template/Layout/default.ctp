@@ -55,9 +55,8 @@ $cakeDescription = 'SimClinic';
                 <li><?= $this->Html->link('Examination',['controller'=>'Examinations']) ?></li>
                 <li><?= $this->Html->link('Analysis',['controller'=>'Analyzes']) ?></li>
                 <li><?= $this->Html->link('Users',['controller'=>'Users']) ?></li>
-                <li><?= $this->Html->link('Profile',['controller'=>'Users']) ?></li>
-                <li><?= $this->Html->link('Login',['controller'=>'Users','action'=>'login']) ?></li>
-                <li><?= $this->Html->link('Logout',['controller'=>'Users','action'=>'logout']) ?></li>
+                <li><?= $this->Html->link('Profile',['controller'=>'Users', 'action'=>'edit', $authUser!=null?$authUser['id']:'']) ?></li>
+                <li><?= $authUser!=null?$this->Html->link('Logout',['controller'=>'Users','action'=>'logout']):$this->Html->link('Login',['controller'=>'Users','action'=>'login']) ?></li>
             </ul>
         </section>
     </nav>

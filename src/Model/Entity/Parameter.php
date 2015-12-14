@@ -7,8 +7,8 @@ use Cake\ORM\Entity;
  * Parameter Entity.
  *
  * @property int $id
- * @property int $name
- * @property int $measureUnit
+ * @property string $name
+ * @property int $maxParameterValue
  * @property \App\Model\Entity\Analyze[] $analyzes
  */
 class Parameter extends Entity

@@ -29,7 +29,7 @@ class UsersTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->hasMany('PersonalData', [
+        $this->hasOne('PersonalData', [
             'foreignKey' => 'user_id'
         ]);
     }

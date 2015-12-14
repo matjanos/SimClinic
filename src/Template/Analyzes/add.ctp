@@ -3,11 +3,6 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Analyzes'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Examinations'), ['controller' => 'Examinations', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Examination'), ['controller' => 'Examinations', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Parameters'), ['controller' => 'Parameters', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Parameter'), ['controller' => 'Parameters', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="analyzes form large-9 medium-8 columns content">
@@ -17,7 +12,12 @@
         <?php
             echo $this->Html->image($analyze->examination->image_path);
             echo $this->Form->input('date');
-            echo $this->Form->input('parameters._ids', ['options' => $parameters]);
+            foreach ($parameters as $key=>$value) {
+                echo "<div class='small-input'>";
+                echo $this->Form->input($value->name,['type'=>'number','min'=>'0', 'max'=>$value->maxParameterValue]);   # code...
+                echo "</div>";
+            }
+            echo $this->Form->input('Decision',['type'=>'number','min'=>'0']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

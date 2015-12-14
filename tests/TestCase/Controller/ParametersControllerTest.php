@@ -19,8 +19,10 @@ class ParametersControllerTest extends IntegrationTestCase
         'app.parameters',
         'app.analyzes',
         'app.examinations',
-        'app.users',
+        'app.technicans',
         'app.personal_data',
+        'app.users',
+        'app.patients',
         'app.analyzes_parameters'
     ];
 

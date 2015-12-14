@@ -72,9 +72,15 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        if( $this->Auth->user('id') != $id){
+            $this->Flash->error(__('You can edit only your account'));
+            return $this->redirect(['action' => 'index']);
+        }
+
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => ['PersonalData']
             ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
@@ -116,13 +122,35 @@ class UsersController extends AppController
         $this->Auth->allow(['login', 'logout', 'add']);
     }
 
+    public function toggleActive($id=null)
+    {
+        if($id != null){
+            $user = $this->Users->get($id);
+            $user->active = !$user->active;
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+                
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+
     public function login()
     {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+                if($user['active']){
+                    $this->Auth->setUser($user);
+                    return $this->redirect($this->Auth->redirectUrl());
+                }
+                else{
+                    $this->Flash->error(__('This user is not active. Contact with administrator.'));
+                    return $this->redirect($this->Auth->redirectUrl());
+                }
+
             }
             $this->Flash->error(__('Invalid username or password, try again'));
         }

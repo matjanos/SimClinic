@@ -64,7 +64,7 @@ class ExaminationsController extends AppController
 
             if ($this->Examinations->save($examination)) {
                 $this->Flash->success(__('The examination has been saved.'));
-               // return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The examination could not be saved. Please, try again.'));
             }

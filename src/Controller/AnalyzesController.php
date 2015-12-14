@@ -60,7 +60,7 @@ class AnalyzesController extends AppController
                 $this->Flash->error(__('The analyze could not be saved. Please, try again.'));
             }
         }
-        $parameters = $this->Analyzes->Parameters->find('list', ['limit' => 200]);
+        $parameters = $this->Analyzes->Parameters->find('all', ['limit' => 200]);
         $this->set(compact('analyze', 'users' ,'parameters'));
         $this->set('_serialize', ['analyze']);
     }

@@ -8,20 +8,24 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Personal Data'), ['controller' => 'PersonalData', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Personal Data'), ['controller' => 'PersonalData', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <fieldset>
-        <legend><?= __('Edit User') ?></legend>
+        <legend><?= __('Edit my account') ?></legend>
         <?php
             echo $this->Form->input('login');
             echo $this->Form->input('password');
-            echo $this->Form->input('role');
-            echo $this->Form->input('creation_date');
+            echo $this->Form->input('personal_data.first_name');
+            echo $this->Form->input('personal_data.last_name');
+            echo $this->Form->input('personal_data.birth_date');
+            echo $this->Form->input('personal_data.sex',['options'=>[1=>'Male', 0=>'Female']]);
+            echo $this->Form->input('personal_data.phone_no');
+            echo $this->Form->input('personal_data.address');
+
         ?>
+
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>

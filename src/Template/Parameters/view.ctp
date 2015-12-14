@@ -13,16 +13,16 @@
     <h3><?= h($parameter->name) ?></h3>
     <table class="vertical-table">
         <tr>
+            <th><?= __('Name') ?></th>
+            <td><?= h($parameter->name) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($parameter->id) ?></td>
         </tr>
         <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= $this->Number->format($parameter->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('MeasureUnit') ?></th>
-            <td><?= $this->Number->format($parameter->measureUnit) ?></td>
+            <th><?= __('MaxParameterValue') ?></th>
+            <td><?= $this->Number->format($parameter->maxParameterValue) ?></td>
         </tr>
     </table>
     <div class="related">

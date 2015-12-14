@@ -561,7 +561,7 @@ div.message.hidden {
 .content h4 {
     color: #be140b;
     padding-bottom: 0.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 20px;    
     border-bottom: 2px solid #be140b;
 }
 
@@ -575,4 +575,10 @@ div.message.hidden {
 
 .header-image h1{
     color: white;
+}
+
+.small-input{
+    width:  100px;
+    display: inline-block;
+    margin: 20px;
 }

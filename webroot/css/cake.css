@@ -23,10 +23,16 @@ header {
     background-color: #15848F;
     color: #ffffff;
     font-size: 30px;
-    height: 84px;
+    height: 250px;
     line-height: 64px;
     padding: 16px 0px;
     box-shadow: 0px 1px rgba(0, 0, 0, 0.24);
+    text-align: center;
+}
+
+
+.header-image img{
+    width: 150px;
 }
 
 header .header-title {
@@ -540,6 +546,12 @@ div.message.hidden {
     }
 }
 
+.user-login{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .content h3 {
     color: #be140b;
     padding-bottom: 0.5rem;
@@ -559,4 +571,8 @@ div.message.hidden {
     margin-top: 20px;
     margin-bottom: 10px;
     border-bottom: 0px;
+}
+
+.header-image h1{
+    color: white;
 }

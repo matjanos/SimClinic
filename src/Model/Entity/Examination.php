@@ -31,4 +31,9 @@ class Examination extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    protected function _getEye()
+    {
+        return $this->eye_side==0?'Left':'Right';
+    }
 }

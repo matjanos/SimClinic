@@ -31,13 +31,17 @@ class ExaminationsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Users', [
+        $this->belongsTo('Technicans', [
+            'propertyName' => 'technican',
             'foreignKey' => 'technican_id',
-            'joinType' => 'INNER'
+            'joinType' => 'INNER',
+            'className' => 'Users'
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('Patients', [
+            'propertyName' => 'patient',
             'foreignKey' => 'patient_id',
-            'joinType' => 'LEFT'
+            'joinType' => 'INNER',
+            'className' => 'Users'
         ]);
         $this->hasMany('Analyzes', [
             'foreignKey' => 'examination_id'

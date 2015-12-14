@@ -25,7 +25,7 @@ class ExaminationsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Technicans', 'Technicans.PersonalData','Patients', 'Patients.PersonalData']
         ];
         $this->set('examinations', $this->paginate($this->Examinations));
         $this->set('_serialize', ['examinations']);
@@ -41,7 +41,7 @@ class ExaminationsController extends AppController
     public function view($id = null)
     {
         $examination = $this->Examinations->get($id, [
-            'contain' => ['Users', 'Analyzes']
+            'contain' => ['Patients', 'Analyzes','Technicans']
         ]);
         $this->set('examination', $examination);
         $this->set('_serialize', ['examination']);
@@ -67,16 +67,16 @@ class ExaminationsController extends AppController
                 $this->Flash->error(__('The examination could not be saved. Please, try again.'));
             }
         }
-        $patients = $this->Examinations->Users->find('list', [
+        $patients = $this->Examinations->Patients->find('list', [
             'limit' => 200,
-            'conditions' => ['Users.role LIKE' => 'patient'],
+            'conditions' => ['Patients.role LIKE' => 'patient'],
             'valueField' =>  'full_name',
             'keyField' => 'id'
             ])->contain(['PersonalData']);
 
-        $technicians = $this->Examinations->Users->find('list', [
+        $technicians = $this->Examinations->Technicans->find('list', [
             'limit' => 200,
-            'conditions' => ['Users.role LIKE' => 'technican'],
+            'conditions' => ['Technicans.role LIKE' => 'technican'],
             'valueField' =>  'full_name',
             'keyField' => 'id'
             ])->contain(['PersonalData']);

@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'SimClinic';
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,6 +34,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
+    <header>
+        <div class="header-image">
+            <?= $this->Html->image('http://icons.iconarchive.com/icons/graphicloads/medical-health/256/eye-icon.png',['height'=>'150px']) ?>
+            <h1>SimClinic</h1>
+        </div>
+    </header>
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
@@ -42,8 +48,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </ul>
         <section class="top-bar-section">
             <ul class="right">
-                <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
+                <li><?= $this->Html->link('Home',['controller'=>'Pages', 'action'=>'home']) ?></li>
+                <li><?= $this->Html->link('Examination',['controller'=>'Examinations']) ?></li>
+                <li><?= $this->Html->link('Analysis',['controller'=>'Analyzes']) ?></li>
+                <li><?= $this->Html->link('Users',['controller'=>'Users']) ?></li>
+                <li><?= $this->Html->link('Profile',['controller'=>'Users']) ?></li>
+                <li><?= $this->Html->link('Login',['controller'=>'Users','action'=>'login']) ?></li>
+                <li><?= $this->Html->link('Logout',['controller'=>'Users','action'=>'logout']) ?></li>
             </ul>
         </section>
     </nav>

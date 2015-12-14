@@ -37,4 +37,46 @@ class AppView extends View
     public function initialize()
     {
     }
+
+
+    public function isAdmin($user){
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }
+
+    public function isDoctor($user){
+        // Admin can access every action
+        if (isset($user['role']) && ($user['role'] === 'doctor' || $user['role'] === 'admin' ) ) {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }
+
+    public function isTechnican($user){
+        // Admin can access every action
+        if (isset($user['role']) && ($user['role'] === 'technican' || $user['role'] === 'admin') ) {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }
+
+
+    public function isPatient($user){
+        // Admin can access every action
+        if (isset($user['role']) && ($user['role'] === 'patient' || $user['role'] === 'admin' ) ) {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }
 }

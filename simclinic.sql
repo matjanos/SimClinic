@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 13 Gru 2015, 20:47
+-- Czas generowania: 14 Gru 2015, 23:40
 -- Wersja serwera: 10.1.9-MariaDB
 -- Wersja PHP: 5.6.15
 
@@ -61,6 +61,15 @@ CREATE TABLE `examinations` (
   `image_path` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Zrzut danych tabeli `examinations`
+--
+
+INSERT INTO `examinations` (`id`, `technican_id`, `patient_id`, `date`, `eye_side`, `image_path`) VALUES
+(1, 3, 5, '2015-12-13', 1, 'uploads/566df9f2af0d2-ss6.jpg'),
+(2, 3, 5, '2015-12-14', 0, 'uploads/566ee888d2ae1-Koala.jpg'),
+(3, 3, 7, '2015-12-14', 1, 'uploads/566f4070e0c32-Chrysanthemum.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -69,9 +78,22 @@ CREATE TABLE `examinations` (
 
 CREATE TABLE `parameters` (
   `id` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
-  `measureUnit` int(11) NOT NULL
+  `name` varchar(25) NOT NULL,
+  `maxParameterValue` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `parameters`
+--
+
+INSERT INTO `parameters` (`id`, `name`, `maxParameterValue`) VALUES
+(1, 'Drusen', 5),
+(2, 'Artery Color', 4),
+(3, 'Vein Color', 3),
+(4, 'Artery Diameter', 7),
+(5, 'Vein Diameter', 6),
+(6, 'AV Change', 2),
+(7, 'Cotton Wool Spot', 3);
 
 -- --------------------------------------------------------
 
@@ -90,6 +112,18 @@ CREATE TABLE `personal_data` (
   `address` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Zrzut danych tabeli `personal_data`
+--
+
+INSERT INTO `personal_data` (`id`, `user_id`, `first_name`, `last_name`, `birth_date`, `sex`, `phone_no`, `address`) VALUES
+(2, 2, 'Super', 'Admin', '2015-12-13', 1, '111 111 111', 'Lisboa'),
+(3, 3, 'Jack', 'Smith', '2010-05-13', 1, '999 999 999', 'Baker Street 5, London'),
+(4, 4, 'Jan', 'Nowak', '2010-02-04', 1, '111 222 333', 'Pozna?ska 20, 87-100 Toru?'),
+(5, 5, 'Miguel', 'Rodriguez', '2017-05-04', 1, '888 888 888', 'Rua Oliveira Martines 100-00 Lisboa'),
+(6, 6, 'Gregory', 'House', '1964-08-12', 1, '888', 'California'),
+(7, 7, 'Tom', 'Riddle', '1970-06-01', 1, '1112 3', 'Hogwart');
+
 -- --------------------------------------------------------
 
 --
@@ -98,11 +132,24 @@ CREATE TABLE `personal_data` (
 
 CREATE TABLE `users` (
   `id` int(7) NOT NULL,
-  `login` varchar(30) NOT NULL,
+  `username` varchar(30) NOT NULL,
   `password` varchar(128) NOT NULL,
   `role` varchar(20) NOT NULL,
-  `creation_date` date NOT NULL
+  `creation_date` date NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `role`, `creation_date`, `active`) VALUES
+(2, 'admin', '$2y$10$KZgcyiecnDgamyfta3e5O.HyVsSrgMtcvjllDk.anxDTqvJBjJ6v.', 'admin', '2015-12-13', 1),
+(3, 'smith', '$2y$10$HvJ9s4JpyCn70iP.nTjkfetFB8AOA9nDIEi.n0IBCXIxg0CYEFYUS', 'technican', '2015-12-13', 1),
+(4, 'nowak', '$2y$10$1m9k/jacO1tC4.DIwPAmruk3DdIuZb2H.tDTFUlUKiW/O0gBJG3FK', 'doctor', '2015-12-13', 1),
+(5, 'rodriguez', '$2y$10$u9iFN8JQY1Mut/98tehlcufcVFRU7FxbMfc356/141iAUi8boRYK6', 'patient', '2015-12-13', 1),
+(6, 'house', '$2y$10$u1RBUzAqvvz3AX/lP9TfEuRMtE0qVYV9Mg0oGZ8SleMESWyFt1dwO', 'doctor', '2015-12-14', 1),
+(7, 'pac', '$2y$10$f6bOuTbNRzKoR6ETIW35XuPaYUoGVrzLds27zw3i2uX1dx3ZoLIfO', 'patient', '2015-12-14', 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -161,20 +208,25 @@ ALTER TABLE `users`
 ALTER TABLE `analyzes_parameters`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT dla tabeli `examinations`
+--
+ALTER TABLE `examinations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT dla tabeli `parameters`
 --
 ALTER TABLE `parameters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT dla tabeli `personal_data`
 --
 ALTER TABLE `personal_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Ograniczenia dla zrzutów tabel
 --

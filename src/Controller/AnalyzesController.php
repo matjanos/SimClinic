@@ -146,4 +146,13 @@ class AnalyzesController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function analyzeSupport(){
+        ///kod gedający odpowiedź.
+        $result = get_object_vars ($this->request->input('json_decode'))[1];
+
+        //to poniżej zostawić!!
+        $this->viewBuilder()->layout(false);
+        $this->set('result', $result);
+    }
 }

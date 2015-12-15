@@ -19,18 +19,18 @@
                 echo "</div>";
             }
             echo "<span class='support'>According to our awesome support disease system it is: <span id='support-proposal'>unknown</span></span>";
-            echo $this->Form->input('Decision',['type'=>'number','min'=>'0']);
+            echo $this->Form->input('Decision',['type'=>'number','min'=>'0', 'id'=>'decision']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
 <script>
-$(document).ready(function(){
+$('#decision').focus(function(){
     var dataa=[];
     <?php
     foreach ($parameters as $parameter) {
-     echo "dataa[".$parameter->id."] = $('#att".$parameter->id."').val(); ".PHP_EOL;  
+     echo "dataa[\"".$parameter->id."\"] = $('#att".$parameter->id."').val(); ".PHP_EOL;  
     }
     ?>
     $.post( "../analyze-support/index.php", dataa).done(function( data )

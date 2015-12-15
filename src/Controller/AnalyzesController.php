@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Analyzes Controller
@@ -10,7 +11,14 @@ use App\Controller\AppController;
  */
 class AnalyzesController extends AppController
 {
-
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+    // Allow users to register and logout.
+    // You should not add the "login" action to allow list. Doing so would
+    // cause problems with normal functioning of AuthComponent.
+        $this->Auth->allow(['analyzeSupport']);
+    }
     /**
      * Index method
      *
@@ -149,8 +157,8 @@ class AnalyzesController extends AppController
 
     public function analyzeSupport(){
         ///kod gedający odpowiedź.
-        $result = get_object_vars ($this->request->input('json_decode'))[1];
-
+//        $result = get_object_vars ($this->request->input('json_decode'))[1];
+        $result = rand (0 , 16);
         //to poniżej zostawić!!
         $this->viewBuilder()->layout(false);
         $this->set('result', $result);

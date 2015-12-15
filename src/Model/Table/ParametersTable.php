@@ -29,10 +29,8 @@ class ParametersTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
-        $this->belongsToMany('Analyzes', [
-            'foreignKey' => 'parameter_id',
-            'targetForeignKey' => 'analyze_id',
-            'joinTable' => 'analyzes_parameters'
+        $this->hasMany('AnalyzesParameters', [
+            'foreignKey' => 'parameter_id'
         ]);
     }
 

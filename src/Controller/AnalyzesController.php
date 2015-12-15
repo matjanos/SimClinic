@@ -42,7 +42,7 @@ class AnalyzesController extends AppController
         $conditions = [];
 
         $analyze = $this->Analyzes->get($id, [
-            'contain' => ['Examinations', 'Doctors', 'Doctors.PersonalData'],
+            'contain' => ['Examinations', 'Doctors','AnalyzesParameters.Parameters','Doctors.PersonalData'],
             'conditions' => $conditions
         ]);
         $this->set('analyze', $analyze);
@@ -60,27 +60,38 @@ class AnalyzesController extends AppController
             $this->Flash->error(__('Insufficient priviledges'));
             return $this->redirect(['action' => 'index']);
         }
+
+
         $analyze = $this->Analyzes->newEntity();
-        $analyze->examination = $this->Analyzes->Examinations->get($id);
-        if ($this->request->is('post')) {
-            $analyze = $this->Analyzes->patchEntity($analyze, $this->request->data);
-            debug($analyze);
-            if ($this->Analyzes->save($analyze)) {
-                $this->Flash->success(__('The analyze has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The analyze could not be saved. Please, try again.'));
-            }
-        }
-        $parameters = $this->Analyzes->Parameters->find('all', ['limit' => 200]);
+        $parameters = $this->Analyzes->AnalyzesParameters->Parameters->find('all', ['limit' => 200]);
         $doctors = $this->Analyzes->Doctors->find('list', 
             ['conditions' => ['Doctors.id'=>$this->Auth->user('id')],
             'valueField' =>  'full_name',
             'keyField' => 'id'])->contain(['PersonalData']);
+        
+        $analyze->examination = $this->Analyzes->Examinations->get($id);
+        if ($this->request->is('post')) {
+            $analyze = $this->Analyzes->patchEntity($analyze, $this->request->data);
+            foreach ($this->request->data['analyzes_parameters'] as $key=>$val) {
+                $analyzeParams = $this->Analyzes->AnalyzesParameters->newEntity();
+                $analyzeParams = $this->Analyzes->AnalyzesParameters->patchEntity($analyzeParams,['parameter_id'=>$key,'value'=>$val]);
+                array_push($analyze->analyzes_parameters, $analyzeParams);
+            }
+            
+            if ($this->Analyzes->save($analyze)) {
+                $this->Flash->success(__('The analyze has been saved.'));
+               // return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The analyze could not be saved. Please, try again.'));
+            }
+        }
         $this->set(compact('analyze', 'doctors' ,'parameters'));
         $this->set('_serialize', ['analyze']);
     }
 
+    private function processAttributes($params){
+
+    }
     /**
      * Edit method
      *

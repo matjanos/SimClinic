@@ -41,10 +41,8 @@ class AnalyzesTable extends Table
             'joinType' => 'INNER',
             'className' => 'Users'
         ]);
-        $this->belongsToMany('Parameters', [
-            'foreignKey' => 'analyze_id',
-            'targetForeignKey' => 'parameter_id',
-            'joinTable' => 'analyzes_parameters'
+        $this->hasMany('AnalyzesParameters', [
+            'foreignKey' => 'analysis_id'
         ]);
     }
 

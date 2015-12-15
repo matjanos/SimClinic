@@ -18,6 +18,7 @@ class AnalyzesController extends AppController
      */
     public function index()
     {        
+        $conditions = [];
         if($this->isPatient() && !$this->isAdmin()){
             $conditions = ['patient_id'=>$this->Auth->user('id')];
         }

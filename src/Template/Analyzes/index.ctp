@@ -26,7 +26,6 @@
                 <td><?= h($analyze->date) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $analyze->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $analyze->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $analyze->id], ['confirm' => __('Are you sure you want to delete # {0}?', $analyze->id)]) ?>
                 </td>
             </tr>

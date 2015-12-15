@@ -77,10 +77,10 @@ class AnalyzesController extends AppController
                 $analyzeParams = $this->Analyzes->AnalyzesParameters->patchEntity($analyzeParams,['parameter_id'=>$key,'value'=>$val]);
                 array_push($analyze->analyzes_parameters, $analyzeParams);
             }
-            
+
             if ($this->Analyzes->save($analyze)) {
                 $this->Flash->success(__('The analyze has been saved.'));
-               // return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The analyze could not be saved. Please, try again.'));
             }

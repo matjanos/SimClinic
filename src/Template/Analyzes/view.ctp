@@ -21,28 +21,17 @@
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Related Parameters') ?></h4>
-        <?php if (!empty($analyze->parameters)): ?>
+        <h4><?= __('Parameters') ?></h4>
+        <?php if (!empty($analyze->analyzes_parameters)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th><?= __('Id') ?></th>
                 <th><?= __('Name') ?></th>
-                <th><?= __('MeasureUnit') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th><?= __('Value') ?></th>
             </tr>
-            <?php foreach ($analyze->parameters as $parameters): ?>
+            <?php foreach ($analyze->analyzes_parameters as $parameterValue): ?>
             <tr>
-                <td><?= h($parameters->id) ?></td>
-                <td><?= h($parameters->name) ?></td>
-                <td><?= h($parameters->measureUnit) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Parameters', 'action' => 'view', $parameters->id]) ?>
-
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Parameters', 'action' => 'edit', $parameters->id]) ?>
-
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Parameters', 'action' => 'delete', $parameters->id], ['confirm' => __('Are you sure you want to delete # {0}?', $parameters->id)]) ?>
-
-                </td>
+                <td><?= h($parameterValue->parameter->name)." (0-".h($parameterValue->parameter->maxParameterValue).")" ?></td>
+                <td><?= h($parameterValue->value) ?></td>
             </tr>
             <?php endforeach; ?>
         </table>

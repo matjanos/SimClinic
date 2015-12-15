@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 14 Gru 2015, 23:40
+-- Czas generowania: 15 Gru 2015, 03:31
 -- Wersja serwera: 10.1.9-MariaDB
 -- Wersja PHP: 5.6.15
 
@@ -33,6 +33,13 @@ CREATE TABLE `analyzes` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Zrzut danych tabeli `analyzes`
+--
+
+INSERT INTO `analyzes` (`id`, `examination_id`, `doctor_id`, `date`) VALUES
+(0, 1, 2, '2015-12-15');
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +52,19 @@ CREATE TABLE `analyzes_parameters` (
   `parameter_id` int(11) NOT NULL,
   `value` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `analyzes_parameters`
+--
+
+INSERT INTO `analyzes_parameters` (`id`, `analysis_id`, `parameter_id`, `value`) VALUES
+(8, 0, 1, 1),
+(9, 0, 2, 2),
+(10, 0, 3, 3),
+(11, 0, 4, 3),
+(12, 0, 5, 2),
+(13, 0, 6, 1),
+(14, 0, 7, 3);
 
 -- --------------------------------------------------------
 
@@ -206,7 +226,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `analyzes_parameters`
 --
 ALTER TABLE `analyzes_parameters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT dla tabeli `examinations`
 --
@@ -235,15 +255,15 @@ ALTER TABLE `users`
 -- Ograniczenia dla tabeli `analyzes`
 --
 ALTER TABLE `analyzes`
-  ADD CONSTRAINT `analyzes_dector_fk` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `analyzes_doctor_fk` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `analyzes_exam_fk` FOREIGN KEY (`examination_id`) REFERENCES `examinations` (`id`);
 
 --
 -- Ograniczenia dla tabeli `analyzes_parameters`
 --
 ALTER TABLE `analyzes_parameters`
-  ADD CONSTRAINT `analyzes_paramval_fk` FOREIGN KEY (`analysis_id`) REFERENCES `analyzes` (`id`),
-  ADD CONSTRAINT `paramval_param_fk` FOREIGN KEY (`parameter_id`) REFERENCES `parameters` (`id`);
+  ADD CONSTRAINT `analyzes_paramval_fk` FOREIGN KEY (`analysis_id`) REFERENCES `analyzes` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `paramval_param_fk` FOREIGN KEY (`parameter_id`) REFERENCES `parameters` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `examinations`

@@ -27,12 +27,13 @@
 </div>
 <script>
 $('#decision').focus(function(){
-    var dataa=[];
+    var dataa={
     <?php
     foreach ($parameters as $parameter) {
-     echo "dataa[\"".$parameter->id."\"] = $('#att".$parameter->id."').val(); ".PHP_EOL;  
+     echo "\"a".$parameter->id."\": $('#att".$parameter->id."').val(), ".PHP_EOL;  
     }
     ?>
+    };
     $.post( "../analyze-support/index.php", dataa).done(function( data )
      {
         $('#support-proposal').text( data );

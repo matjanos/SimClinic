@@ -35,9 +35,11 @@ class AnalyzesTable extends Table
             'foreignKey' => 'examination_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('Doctors', [
+            'propertyName' => 'doctor',
             'foreignKey' => 'doctor_id',
-            'joinType' => 'INNER'
+            'joinType' => 'INNER',
+            'className' => 'Users'
         ]);
         $this->belongsToMany('Parameters', [
             'foreignKey' => 'analyze_id',
@@ -76,7 +78,7 @@ class AnalyzesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['examination_id'], 'Examinations'));
-        $rules->add($rules->existsIn(['doctor_id'], 'Users'));
+        $rules->add($rules->existsIn(['doctor_id'], 'Doctors'));
         return $rules;
     }
 }

@@ -103,6 +103,11 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        if(!$this->isAdmin()){
+            $this->Flash->error(__('Insufficient priviledges'));
+            return $this->redirect(['action' => 'index']);
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
@@ -124,6 +129,10 @@ class UsersController extends AppController
 
     public function toggleActive($id=null)
     {
+        if(!$this->isAdmin()){
+            $this->Flash->error(__('Insufficient priviledges'));
+            return $this->redirect(['action' => 'index']);
+        }
         if($id != null){
             $user = $this->Users->get($id);
             $user->active = !$user->active;

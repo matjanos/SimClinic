@@ -57,6 +57,19 @@ class AppController extends Controller
         $this->set('authUser', $this->Auth->user());
     }
 
+    protected function isAdmin(){
+        return ($this->Auth!=null && $this->Auth->user('role')=='admin');
+    }
+    protected function isDoctor(){
+        return ($this->Auth!=null && $this->Auth->user('role')=='doctor') || $this->isAdmin();
+    }
+    protected function isTechnican(){
+        return ($this->Auth!=null && $this->Auth->user('role')=='technican') || $this->isAdmin();
+    }
+    protected function isPatient(){
+        return ($this->Auth!=null && $this->Auth->user('role')=='patient') || $this->isAdmin();
+    }
+
     /**
      * Before render callback.
      *

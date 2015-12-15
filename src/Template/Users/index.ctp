@@ -25,7 +25,6 @@
                 <td><?= h($user->creation_date) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
                     <?php if($this->isAdmin($authUser)) echo $this->Html->link($user->active?'Deactivate':'Activate', ['action' => 'toggleActive', $user->id]) ?>
 
                 </td>

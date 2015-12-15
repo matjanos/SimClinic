@@ -1,13 +1,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Analyze'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Examinations'), ['controller' => 'Examinations', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Examination'), ['controller' => 'Examinations', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Parameters'), ['controller' => 'Parameters', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Parameter'), ['controller' => 'Parameters', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="analyzes index large-9 medium-8 columns content">
@@ -27,7 +22,7 @@
             <tr>
                 <td><?= $this->Number->format($analyze->id) ?></td>
                 <td><?= $analyze->has('examination') ? $this->Html->link($analyze->examination->id, ['controller' => 'Examinations', 'action' => 'view', $analyze->examination->id]) : '' ?></td>
-                <td><?= $analyze->has('user') ? $this->Html->link($analyze->user->id, ['controller' => 'Users', 'action' => 'view', $analyze->user->id]) : '' ?></td>
+                <td><?= $analyze->has('doctor') ? $this->Html->link($analyze->doctor->fullName, ['controller' => 'Users', 'action' => 'view', $analyze->doctor->id]) : '' ?></td>
                 <td><?= h($analyze->date) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $analyze->id]) ?>

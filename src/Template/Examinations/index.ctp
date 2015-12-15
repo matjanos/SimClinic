@@ -20,6 +20,7 @@
         </thead>
         <tbody>
             <?php foreach ($examinations as $examination): ?>
+            <?php if(($authUser['role']=='doctor' && $examination->analyze==null)||$authUser['role']!='doctor'): ?>
             <tr>
                 <td><?= $this->Number->format($examination->id) ?></td>
                 <td><?= $examination->has('technican') ? $this->Html->link($examination->technican->fullName, ['controller' => 'Users', 'action' => 'view', $examination->technican->id]) : ''?></td>
@@ -31,6 +32,7 @@
                     <?= $this->isTechnican($authUser)?$this->Form->postLink(__('Delete'), ['action' => 'delete', $examination->id], ['confirm' => __('Are you sure you want to delete # {0}?', $examination->id)]):'' ?>
                 </td>
             </tr>
+            <?php endif; ?>
             <?php endforeach; ?>
         </tbody>
     </table>

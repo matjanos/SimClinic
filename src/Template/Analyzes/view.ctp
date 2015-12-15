@@ -1,16 +1,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Analyze'), ['action' => 'edit', $analyze->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Analyze'), ['action' => 'delete', $analyze->id], ['confirm' => __('Are you sure you want to delete # {0}?', $analyze->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Analyzes'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Analyze'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Examinations'), ['controller' => 'Examinations', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Examination'), ['controller' => 'Examinations', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Parameters'), ['controller' => 'Parameters', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Parameter'), ['controller' => 'Parameters', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="analyzes view large-9 medium-8 columns content">
@@ -21,12 +12,8 @@
             <td><?= $analyze->has('examination') ? $this->Html->link($analyze->examination->id, ['controller' => 'Examinations', 'action' => 'view', $analyze->examination->id]) : '' ?></td>
         </tr>
         <tr>
-            <th><?= __('User') ?></th>
-            <td><?= $analyze->has('user') ? $this->Html->link($analyze->user->id, ['controller' => 'Users', 'action' => 'view', $analyze->user->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($analyze->id) ?></td>
+            <th><?= __('Doctor') ?></th>
+            <td><?= $analyze->has('doctor') ? $this->Html->link($analyze->doctor->fullName, ['controller' => 'Users', 'action' => 'view', $analyze->doctor->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Date') ?></th>

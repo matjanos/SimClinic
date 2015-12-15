@@ -32,34 +32,4 @@
                                 'height'   => '600',
                                 'alt'      => 'No Image' 
                              ]) ?>
-    <div class="related">
-        <h4><?= __('Related Analyzes') ?></h4>
-        <?php if (!empty($examination->analyzes)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Examination Id') ?></th>
-                <th><?= __('Doctor Id') ?></th>
-                <th><?= __('Date') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($examination->analyzes as $analyzes): ?>
-            <tr>
-                <td><?= h($analyzes->id) ?></td>
-                <td><?= h($analyzes->examination_id) ?></td>
-                <td><?= h($analyzes->doctor_id) ?></td>
-                <td><?= h($analyzes->date) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Analyzes', 'action' => 'view', $analyzes->id]) ?>
-
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Analyzes', 'action' => 'edit', $analyzes->id]) ?>
-
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Analyzes', 'action' => 'delete', $analyzes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $analyzes->id)]) ?>
-
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
-    </div>
 </div>

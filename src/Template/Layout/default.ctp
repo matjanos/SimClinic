@@ -48,13 +48,13 @@ $cakeDescription = 'SimClinic';
         </ul>
         <section class="top-bar-section">
         <span class="left" style="color:white; font-size:smaller; margin-left:10px;">
-            Logged as: <?= $authUser!=null?$authUser['username']:'guest' ?>
+            Logged as: <?= $authUser!=null?($authUser['username'].' ('.$authUser['role'].')'):'guest' ?>
         </span>
             <ul class="right">
                 <li><?= $this->Html->link('Home',['controller'=>'Pages', 'action'=>'home']) ?></li>
-                <li><?= $this->Html->link('Examination',['controller'=>'Examinations']) ?></li>
-                <li><?= $this->Html->link('Analysis',['controller'=>'Analyzes']) ?></li>
-                <li><?= $this->Html->link('Users',['controller'=>'Users']) ?></li>
+                <li><?= $this->Html->link('Examination',['controller'=>'Examinations','action'=>'index']) ?></li>
+                <li><?= $this->Html->link('Analysis',['controller'=>'Analyzes', 'action'=>'index']) ?></li>
+                <li><?= $this->Html->link('Users',['controller'=>'Users','action'=>'index']) ?></li>
                 <li><?= $this->Html->link('Profile',['controller'=>'Users', 'action'=>'edit', $authUser!=null?$authUser['id']:'']) ?></li>
                 <li><?= $authUser!=null?$this->Html->link('Logout',['controller'=>'Users','action'=>'logout']):$this->Html->link('Login',['controller'=>'Users','action'=>'login']) ?></li>
             </ul>

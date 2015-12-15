@@ -12,6 +12,7 @@
         <?php
             echo $this->Html->image($analyze->examination->image_path);
             echo $this->Form->input('date');
+            echo $this->Form->input('doctor_id', ['options' => $doctors]);
             foreach ($parameters as $key=>$value) {
                 echo "<div class='small-input'>";
                 echo $this->Form->input($value->name,['type'=>'number','min'=>'0', 'max'=>$value->maxParameterValue]);   # code...

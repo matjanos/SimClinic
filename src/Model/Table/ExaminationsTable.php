@@ -43,7 +43,7 @@ class ExaminationsTable extends Table
             'joinType' => 'INNER',
             'className' => 'Users'
         ]);
-        $this->hasMany('Analyzes', [
+        $this->hasOne('Analyzes', [
             'foreignKey' => 'examination_id'
         ]);
     }

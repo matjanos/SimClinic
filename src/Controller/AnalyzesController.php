@@ -17,9 +17,13 @@ class AnalyzesController extends AppController
      * @return void
      */
     public function index()
-    {
+    {        
+        if($this->isPatient() && !$this->isAdmin()){
+            $conditions = ['patient_id'=>$this->Auth->user('id')];
+        }
         $this->paginate = [
-            'contain' => ['Examinations', 'Users']
+            'contain' => ['Examinations', 'Doctors', 'Doctors.PersonalData'],
+            'conditions' => $conditions
         ];
         $this->set('analyzes', $this->paginate($this->Analyzes));
         $this->set('_serialize', ['analyzes']);
@@ -34,8 +38,11 @@ class AnalyzesController extends AppController
      */
     public function view($id = null)
     {
+        $conditions = [];
+
         $analyze = $this->Analyzes->get($id, [
-            'contain' => ['Examinations', 'Users', 'Parameters']
+            'contain' => ['Examinations', 'Doctors', 'Doctors.PersonalData'],
+            'conditions' => $conditions
         ]);
         $this->set('analyze', $analyze);
         $this->set('_serialize', ['analyze']);
@@ -48,11 +55,15 @@ class AnalyzesController extends AppController
      */
     public function add($id = null)
     {
+        if(!$this->isDoctor()){
+            $this->Flash->error(__('Insufficient priviledges'));
+            return $this->redirect(['action' => 'index']);
+        }
         $analyze = $this->Analyzes->newEntity();
         $analyze->examination = $this->Analyzes->Examinations->get($id);
-        $analyze->user=$this->Auth->user();
         if ($this->request->is('post')) {
             $analyze = $this->Analyzes->patchEntity($analyze, $this->request->data);
+            debug($analyze);
             if ($this->Analyzes->save($analyze)) {
                 $this->Flash->success(__('The analyze has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -61,7 +72,11 @@ class AnalyzesController extends AppController
             }
         }
         $parameters = $this->Analyzes->Parameters->find('all', ['limit' => 200]);
-        $this->set(compact('analyze', 'users' ,'parameters'));
+        $doctors = $this->Analyzes->Doctors->find('list', 
+            ['conditions' => ['Doctors.id'=>$this->Auth->user('id')],
+            'valueField' =>  'full_name',
+            'keyField' => 'id'])->contain(['PersonalData']);
+        $this->set(compact('analyze', 'doctors' ,'parameters'));
         $this->set('_serialize', ['analyze']);
     }
 
@@ -74,6 +89,10 @@ class AnalyzesController extends AppController
      */
     public function edit($id = null)
     {
+        if(!$this->isDoctor()){
+            $this->Flash->error(__('Insufficient priviledges'));
+            return $this->redirect(['action' => 'index']);
+        }
         $analyze = $this->Analyzes->get($id, [
             'contain' => ['Parameters']
         ]);
@@ -102,6 +121,10 @@ class AnalyzesController extends AppController
      */
     public function delete($id = null)
     {
+        if(!$this->isDoctor()){
+            $this->Flash->error(__('Insufficient priviledges'));
+            return $this->redirect(['action' => 'index']);
+        }
         $this->request->allowMethod(['post', 'delete']);
         $analyze = $this->Analyzes->get($id);
         if ($this->Analyzes->delete($analyze)) {

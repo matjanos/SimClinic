@@ -24,8 +24,14 @@ class ExaminationsController extends AppController
      */
     public function index()
     {
+        $conditions = [];
+        if($this->isPatient() && !$this->isAdmin()){
+            $conditions = ['patient_id'=>$this->Auth->user('id')];
+        }
+
         $this->paginate = [
-            'contain' => ['Technicans', 'Technicans.PersonalData','Patients', 'Patients.PersonalData']
+            'contain' => ['Technicans', 'Technicans.PersonalData','Patients', 'Patients.PersonalData', 'Analyzes'],
+            'conditions' => $conditions
         ];
         $this->set('examinations', $this->paginate($this->Examinations));
         $this->set('_serialize', ['examinations']);
@@ -54,6 +60,10 @@ class ExaminationsController extends AppController
      */
     public function add()
     {
+        if(!$this->isTechnican()){
+            $this->Flash->error(__('Insufficient priviledges'));
+            return $this->redirect(['action' => 'index']);
+        }
         $examination = $this->Examinations->newEntity();
         if ($this->request->is('post')) {
 
@@ -96,6 +106,10 @@ class ExaminationsController extends AppController
      */
     public function delete($id = null)
     {
+        if(!$this->isTechnican()){
+            $this->Flash->error(__('Insufficient priviledges'));
+            return $this->redirect(['action' => 'index']);
+        }
         $this->request->allowMethod(['post', 'delete']);
         $examination = $this->Examinations->get($id);
         if ($this->Examinations->delete($examination)) {

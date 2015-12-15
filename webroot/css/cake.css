@@ -582,3 +582,7 @@ div.message.hidden {
     display: inline-block;
     margin: 20px;
 }
+
+.support{
+    font-style: italic;
+}

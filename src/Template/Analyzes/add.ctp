@@ -15,12 +15,27 @@
             echo $this->Form->input('doctor_id', ['options' => $doctors]);
             foreach ($parameters as $parameter) {
                 echo "<div class='small-input'>";
-                echo $this->Form->input("analyzes_parameters.".$parameter->id,['label'=> $parameter->name,'type'=>'number','min'=>'0', 'max'=>$parameter->maxParameterValue]);   # code...
+                echo $this->Form->input("analyzes_parameters.".$parameter->id,['id'=>'att'.$parameter->id,'label'=> $parameter->name,'type'=>'number','min'=>'0', 'max'=>$parameter->maxParameterValue]);   # code...
                 echo "</div>";
             }
+            echo "<span class='support'>According to our awesome support disease system it is: <span id='support-proposal'>unknown</span></span>";
             echo $this->Form->input('Decision',['type'=>'number','min'=>'0']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+<script>
+$(document).ready(function(){
+    var dataa=[];
+    <?php
+    foreach ($parameters as $parameter) {
+     echo "dataa[".$parameter->id."] = $('#att".$parameter->id."').val(); ".PHP_EOL;  
+    }
+    ?>
+    $.post( "../analyze-support/index.php", dataa).done(function( data )
+     {
+        $('#support-proposal').text( data );
+    }  )
+});
+</script>

@@ -36,7 +36,7 @@ $('#decision').focus(function(){
     };
     $.post( "../analyze-support/index.php", dataa).done(function( data )
      {
-        $('#support-proposal').text( data );
+        $('#support-proposal').html( data );
     }  )
 });
 </script>

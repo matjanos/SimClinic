@@ -157,16 +157,14 @@ class AnalyzesController extends AppController
 
     public function analyzeSupport(){
         ///kod gedający odpowiedź.
-        $json = preg_replace('/(\w+):/i', '"\1":', $this->request->input());
-       $parameters = (json_decode($json));
-      // debug($parameters);
-        $drusen =   intval($parameters["a1"]);
-        $vein_dia = intval($parameters["a5"]);
-        $artery_d = intval($parameters["a4"]);
-        $av_chang = intval($parameters["a6"]);
-        $artery_c = intval($parameters["a2"]);
-        $vein_col = intval($parameters["a3"]);
-        $cottonwo = intval($parameters["a7"]);
+       $parameters = $this->request->data;
+        $drusen =   intval($parameters['a1']);
+        $vein_dia = intval($parameters['a5']);
+        $artery_d = intval($parameters['a4']);
+        $av_chang = intval($parameters['a6']);
+        $artery_c = intval($parameters['a2']);
+        $vein_col = intval($parameters['a3']);
+        $cottonwo = intval($parameters['a7']);
 
            /*Terminal Node 1*/
         if

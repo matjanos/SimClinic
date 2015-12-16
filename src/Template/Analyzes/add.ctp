@@ -26,6 +26,28 @@
     <?= $this->Form->end() ?>
 </div>
 <script>
+
+var diseases = {
+    "0":"Normal",
+    "1":"Hollenhorst Emboli",
+    "2":"Branch Retinal Artery Occlusion",
+    "3":"Cilio-Retinal Artery Occlusion",
+    "4":"Branch Retinal Vein Occlusion",
+    "5":"Central Retinal Vein Occlusion",
+    "6":"Hemi-Central Retinal Vein Occlusion",
+    "7":"Background Diabetic Retinopathy",
+    "8":"Proliferative Diabetic Retinopathy",
+    "9":"Arteriosclerotic Retinopathy",
+    "10":"Hypertensive Retinopathy",
+    "11":"Coat's",
+    "12":"Macroaneurism",
+    "13":"Choroidal Neovascularization",
+    "14":"Histoplasmosis",
+    "15":"Age Related Macular Degeneration",
+    "16":"Unknown diagnosis"
+}
+
+
 $('#decision').focus(function(){
     var dataa={
     <?php
@@ -36,7 +58,7 @@ $('#decision').focus(function(){
     };
     $.post( "../analyze-support/index.php", dataa).done(function( data )
      {
-        $('#support-proposal').html( data );
+        $('#support-proposal').html( diseases[data] );
     }  )
 });
 </script>

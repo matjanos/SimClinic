@@ -69,6 +69,26 @@ class AnalyzesController extends AppController
             return $this->redirect(['action' => 'index']);
         }
 
+        $diseases = [
+            "0"=>"Normal",
+            "1"=>"Hollenhorst Emboli",
+            "2"=>"Branch Retinal Artery Occlusion",
+            "3"=>"Cilio-Retinal Artery Occlusion",
+            "4"=>"Branch Retinal Vein Occlusion",
+            "5"=>"Central Retinal Vein Occlusion",
+            "6"=>"Hemi-Central Retinal Vein Occlusion",
+            "7"=>"Background Diabetic Retinopathy",
+            "8"=>"Proliferative Diabetic Retinopathy",
+            "9"=>"Arteriosclerotic Retinopathy",
+            "10"=>"Hypertensive Retinopathy",
+            "11"=>"Coat's",
+            "12"=>"Macroaneurism",
+            "13"=>"Choroidal Neovascularization",
+            "14"=>"Histoplasmosis",
+            "15"=>"Age Related Macular Degeneration",
+            "16"=>"Unknown diagnosis"
+        ];
+
 
         $analyze = $this->Analyzes->newEntity();
         $parameters = $this->Analyzes->AnalyzesParameters->Parameters->find('all', ['limit' => 200]);
@@ -93,7 +113,7 @@ class AnalyzesController extends AppController
                 $this->Flash->error(__('The analyze could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('analyze', 'doctors' ,'parameters'));
+        $this->set(compact('analyze', 'doctors' ,'parameters', 'diseases'));
         $this->set('_serialize', ['analyze']);
     }
 

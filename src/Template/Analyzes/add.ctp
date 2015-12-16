@@ -18,7 +18,7 @@
                 echo $this->Form->input("analyzes_parameters.".$parameter->id,['type'=>'select','options'=>range(0,$parameter->maxParameterValue),'id'=>'att'.$parameter->id,'label'=> $parameter->name]);   # code...
                 echo "</div>";
             }
-            echo $this->Form->input('Decision',['type'=>'select', 'options'=> range(1,16)]);
+            echo $this->Form->input('Decision',['type'=>'select', 'options'=> $diseases]);
             echo "<br/><br/><span class='support'>According to our awesome support disease system it is: <span id='support-proposal'>unknown</span></span>";
         ?>
     </fieldset>
@@ -28,23 +28,11 @@
 <script>
 
 var diseases = {
-    "0":"Normal",
-    "1":"Hollenhorst Emboli",
-    "2":"Branch Retinal Artery Occlusion",
-    "3":"Cilio-Retinal Artery Occlusion",
-    "4":"Branch Retinal Vein Occlusion",
-    "5":"Central Retinal Vein Occlusion",
-    "6":"Hemi-Central Retinal Vein Occlusion",
-    "7":"Background Diabetic Retinopathy",
-    "8":"Proliferative Diabetic Retinopathy",
-    "9":"Arteriosclerotic Retinopathy",
-    "10":"Hypertensive Retinopathy",
-    "11":"Coat's",
-    "12":"Macroaneurism",
-    "13":"Choroidal Neovascularization",
-    "14":"Histoplasmosis",
-    "15":"Age Related Macular Degeneration",
-    "16":"Unknown diagnosis"
+    <?php
+    foreach ($diseases as $diseaseNum=>$diseaseName) {
+     echo "\"".$diseaseNum."\":\"".$diseaseName."\",".PHP_EOL;  
+    }
+    ?>
 }
 
 
